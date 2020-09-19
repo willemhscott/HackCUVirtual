@@ -2,32 +2,30 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-const { Client } = require('pg');
+const { Pool } = require('pg');
 
-const client = new Client({
+const pool = new Pool({
     host: '3.17.77.33',
-    port: 5432,
     user: 'ubuntu',
     password: 'password',
-    database: 'hackcuvirtual'
-});
-client.connect((err) => {
-    if (err) {
-        console.error('error connecting', err.stack);
-    } else {
-        console.log('connected to ' + client.database);
-    }
+    database: 'hackcuvirtual',
+    max: 20,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 2000
 });
 
 app.get('/users/:usernum', (req, res) => {
-    client.query('SELECT username FROM users', (err, reso) => {
-        client.end((err) => {
-            console.log('client has disconnected');
+    pool.connect((err, client, done) => {
+        if (err) throw err;
+        client.query('SELECT username FROM users', (err, reso) => {
+            done();
             if (err) {
-                console.log('error during disconnection', err.stack);
+                console.log(err.stack);
+            } else {
+                console.log(reso.rows[req.params.usernum]);
+                res.send(reso.rows[req.params.usernum]);
             }
         });
-        res.send(reso.rows[req.params.usernum]);
     });
 });
 
