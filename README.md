@@ -1,6 +1,6 @@
 # HackCUVirtual
 
-TODO List:
+Goals:
 - Create account form
 - Profile view
 - buttons to browse profiles (yay or nay) ((L or R)) ((( :white_check_mark: or :x: )))
@@ -8,3 +8,6 @@ TODO List:
 - Chat feature
 - Settings
 - Dark Mode (at some point)
+
+Stretch Goals:
+- User authentication
