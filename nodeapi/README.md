@@ -18,8 +18,8 @@ Endpoints:
     - corona
 - messagehistory
     - ```postgresql
-    SELECT from_user, timestamp, content FROM messages WHERE (from_user = $1 and to_user = $2) OR (from_user = $2 and to_user = $1)
-    ```
+      SELECT from_user, timestamp, content FROM messages WHERE (from_user = $1 and to_user = $2) OR (from_user = $2 and to_user = $1)
+      ```
 - createuser
     - ```postgresql
     
