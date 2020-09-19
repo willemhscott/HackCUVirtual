@@ -18,14 +18,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Automatically open to activity_login.xml
+        val login: Button = findViewById(R.id.login)
+        val autoLogin: Button = findViewById(R.id.auto_login)
+        val userView: Button = findViewById(R.id.user_view)
+        val matches: Button = findViewById(R.id.matches)
+        val profileView: Button = findViewById(R.id.profile_view)
+        val messanger: Button = findViewById(R.id.messanger)
 
-        val loggedIn = true;
-        val intent = Intent( this, LoginActivity::class.java).apply {
-            putExtra(EXTRA_MESSAGE, loggedIn)
-        }
+        var intent = Intent( this, LoginActivity::class.java).apply { putExtra(EXTRA_MESSAGE, false) }
 
-        startActivity( intent )
+        login.setOnClickListener { startActivity( Intent( this, LoginActivity::class.java).apply { putExtra(EXTRA_MESSAGE, false) } ) }
+        autoLogin.setOnClickListener { startActivity( Intent( this, LoginActivity::class.java).apply { putExtra(EXTRA_MESSAGE, true) } ) }
+        userView.setOnClickListener { startActivity( Intent( this, UserViewActivity::class.java ) ) }
+        matches.setOnClickListener { startActivity( Intent( this, MatchesActivity::class.java ) ) }
+        profileView.setOnClickListener { startActivity( Intent( this, ProfileViewActivity::class.java ) ) }
+        messanger.setOnClickListener { startActivity( Intent( this, ProfileViewActivity::class.java ) ) }
+
 
     }
 

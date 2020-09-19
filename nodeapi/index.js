@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const crypto = require('crypto');
 const app = express();
 const port = 3000;
 
@@ -42,6 +43,31 @@ app.get('/viewtablem', (req, res) => {
                 res.send(reso.rows);
             }
         });
+    });
+});
+
+app.get('/login', (req, res) => {
+    const values = [ req.body.username, req.body.password ];
+    pool.connect((err, client, done) => {
+        if (err) throw err;
+        client.query(
+            'SELECT username FROM users WHERE username = $1 AND password = crypt($2, password)',
+            values,
+            (err, reso) => {
+                done();
+                if (err) {
+                    console.log(err.stack);
+                } else {
+                    if (reso.rows[0]) {
+                        const hash = crypto
+                            .createHash('sha256')
+                            .update(req.body.username + req.body.password, 'utf8')
+                            .digest('base64');
+                        res.send({ headers: { 'x-authorization': hash } });
+                    }
+                }
+            }
+        );
     });
 });
 

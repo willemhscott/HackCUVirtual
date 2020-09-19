@@ -6,13 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".UserViewActivity">
 
+
+    <TextView
+        android:id="@+id/user_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User View Activity"
+        android:textColor="#AA5833"
+        android:textSize="42sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="273dp"
+        android:layout_height="258dp"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="134dp"
+        tools:srcCompat="@tools:sample/avatars"
+        tools:ignore="MissingConstraints" />
+
     <Button
         android:id="@+id/button2"
         android:layout_width="166dp"
         android:layout_height="97dp"
         android:text="Nay"
         tools:layout_editor_absoluteX="229dp"
-        tools:layout_editor_absoluteY="337dp" />
+        tools:layout_editor_absoluteY="438dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button"
@@ -20,14 +44,7 @@
         android:layout_height="97dp"
         android:text="Yay"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="337dp" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="273dp"
-        android:layout_height="258dp"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="33dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:layout_editor_absoluteY="438dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
