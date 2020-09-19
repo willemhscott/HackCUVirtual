@@ -8,7 +8,13 @@
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>ubuntu</user-name>
-      <schema-mapping />
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="database" qname="@">
+            <node kind="schema" qname="@" />
+          </node>
+        </introspection-scope>
+      </schema-mapping>
       <ssh-properties>
         <enabled>true</enabled>
         <ssh-config-id>92824433-5688-4080-9225-3062ae075f4f</ssh-config-id>
