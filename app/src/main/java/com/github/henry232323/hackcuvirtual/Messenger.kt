@@ -1,5 +1,6 @@
 package com.github.henry232323.hackcuvirtual
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
@@ -19,13 +20,13 @@ import java.sql.Timestamp
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
-data class Authentication (
+data class Authentication(
     val type: String = "authenticate",
     val username: String,
     val password: String
 )
 
-data class Message (
+data class Message(
     val type: String = "message",
     val from: String,
     val to: String,
@@ -36,25 +37,30 @@ data class Message (
 interface WebsocketClient {
     @Send
     fun sendAuth(auth: Authentication)
+
     @Send
     fun sendMessage(message: Message)
+
     @Receive
     fun observeMessage(): Flowable<Message>
+
     @Receive
     fun observeOnConnectionOpenedEvent(): Flowable<WebSocket.Event.OnConnectionOpened<*>>
+
     @Receive
     fun observeWebSocketEvent(): Flowable<WebSocket.Event>
 }
 
 const val WEBSOCK_URL = "wss://3.17.77.33"
-class Messenger : AppCompatActivity()  {
 
-    fun createAppForegroundAndUserLoggedInLifecycle(): Lifecycle {
-        return AndroidLifecycle.ofApplicationForeground(application)
-            .combineWith(loggedInLifecycle)
-    }
+class Messenger : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+    lateinit var authentication: Authentication
+    lateinit var messenger: WebsocketClient
+
+    @SuppressLint("CheckResult")
+    public fun start(username: String, password: String) {
+        authentication = Authentication("authenticate", username, password)
         val BACKOFF_STRATEGY = ExponentialWithJitterBackoffStrategy(1000, 60000)
         val scarletInst = Scarlet.Builder()
             .backoffStrategy(BACKOFF_STRATEGY)
@@ -64,21 +70,28 @@ class Messenger : AppCompatActivity()  {
             .build()
 
 
-        val scarletMessenger = scarletInst.create<Messenger>()
+        val messenger = scarletInst.create<WebsocketClient>()
 
 
-        scarletMessenger.sendMes
-    }
-    /*
-
-    Example Code:
-    private fun processMessage(content) {
-        val textView: TextView = findViewById(R.id.animalSound)
-        textView.setText(message)
+        messenger.observeMessage().subscribe { message -> processMessage(message) }
+        messenger.observeOnConnectionOpenedEvent().subscribe { onConnectionOpen() }
     }
 
-    Add the new message (using its user) to the messaging textview
-     */
+    fun createAppForegroundAndUserLoggedInLifecycle(): Lifecycle {
+        return AndroidLifecycle.ofApplicationForeground(application)
+            .combineWith(loggedInLifecycle)
+    }
 
+    private fun onConnectionOpen() {
+        if (authentication != null) {
+            messenger.sendAuth(authentication);
+        }
+    }
+
+    private fun processMessage(message: Message) {
+        print(message.content)
+        //  val textView: TextView = findViewById(R.id.animalSound)
+        //  textView.setText(message)
+    }
 
 }
