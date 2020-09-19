@@ -17,19 +17,22 @@ const pool = new Pool({
     connectionTimeoutMillis: 2000
 });
 
-app.get('/users/:usernum', (req, res) => {
+app.get('/viewtable', (req, res) => {
     pool.connect((err, client, done) => {
         if (err) throw err;
-        client.query('SELECT username FROM users', (err, reso) => {
+        client.query('SELECT * FROM users', (err, reso) => {
             done();
             if (err) {
                 console.log(err.stack);
             } else {
-                console.log(reso.rows[req.params.usernum]);
-                res.send(reso.rows[req.params.usernum]);
+                res.send(reso.rows);
             }
         });
     });
+});
+
+app.post('/sendmessage', (req, res) => {
+    const values = [ req.body.fromuser, req.body.touser, req.body.content ];
 });
 
 app.post('/createuser', (req, res) => {
@@ -44,23 +47,40 @@ app.post('/createuser', (req, res) => {
         JSON.stringify(req.body.allergens),
         req.body.covid
     ];
+    var taken = false;
     pool.connect((err, client, done) => {
         if (err) throw err;
-        client.query(
-            "INSERT INTO users (username, display_name, age, password, email_address, gender, favorites, allergens, covid) VALUES ($1, $2, $3, crypt($4, gen_salt('bf')), $5, $6, $7, $8, $9)",
-            values,
-            (err, reso) => {
-                done();
-                if (err) {
-                    console.log(err.stack);
-                } else {
-                    // console.log(reso.rows[req.params.usernum]);
-                    // res.send(reso.rows[req.params.usernum]);
-                }
+        client.query('SELECT username FROM users', (err, reso) => {
+            done();
+            if (err) {
+                console.log(err.stack);
+            } else {
+                reso.rows.forEach((uname) => {
+                    if (uname.username == values[0]) {
+                        res.send('Username already taken');
+                        taken = true;
+                    }
+                });
             }
-        );
+        });
     });
-    res.sendStatus(200);
+    pool.connect((err, client, done) => {
+        if (err) throw err;
+        if (!taken) {
+            client.query(
+                "INSERT INTO users (username, display_name, age, password, email_address, gender, favorites, allergens, covid) VALUES ($1, $2, $3, crypt($4, gen_salt('bf')), $5, $6, $7, $8, $9)",
+                values,
+                (err) => {
+                    done();
+                    if (err) {
+                        console.log(err.stack);
+                    } else {
+                        res.sendStatus(200);
+                    }
+                }
+            );
+        }
+    });
 });
 
 app.listen(port, () => {
