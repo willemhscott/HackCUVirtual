@@ -32,3 +32,16 @@ Endpoints:
                 $1, $2, $3, crypt($4, gen_salt('bf')), $5, $6, $7, $8, $9
       )
       ```
+    - ```json
+      {
+          "username": "john",
+          "display": "John Smith",
+          "age": 25,
+          "password": "p4ssw0rd",
+          "email": "john.smith@example.com",
+          "gender": "male",
+          "favorites": ["sushi"],
+          "allergens": ["peanuts"],
+          "covid": false
+      }
+      ```
