@@ -49,6 +49,7 @@ interface WebsocketClient {
 }
 
 const val WEBSOCK_URL = "wss://3.17.77.33"
+const val API_BASE = "http://3.17.77.33"
 
 class Messenger {
 
@@ -64,7 +65,7 @@ class Messenger {
         body.put("password", password)
 
         val request: Request = Request.Builder()
-            .url("http://3.17.77.33/login")
+            .url("$API_BASE/login")
             .post(RequestBody.create(MediaType.get("application/json"), body.toString()))
             .build()
 
