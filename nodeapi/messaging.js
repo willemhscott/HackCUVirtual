@@ -1,4 +1,5 @@
 const WebSocket = require('ws');
+const { Pool } = require('pg');
 
 const wss = new WebSocket.Server({
     port: 8080,
@@ -21,4 +22,43 @@ const wss = new WebSocket.Server({
         threshold: 1024 // Size (in bytes) below which messages
         // should not be compressed.
     }
+});
+
+const pool = new Pool({
+    host: '3.17.77.33',
+    user: 'ubuntu',
+    password: 'password',
+    database: 'hackcuvirtual',
+    max: 20,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 2000
+});
+
+// {"type": "message", "from": "henry", "to": "abdul", "timestamp": 0, "content": "you have small ball"}
+
+wss.on('connection', function connection(ws) {
+    ws.on('message', function incoming(message) {
+        const jmessage = JSON.parse(message);
+        if (jmessage.type == 'message') {
+            const values = [ jmessage.from, jmessage.to, jmessage.content ];
+            pool.connect((err, client, done) => {
+                if (err) throw err;
+                client.query(
+                    'INSERT INTO messages (from_user, to_user, content) VALUES ($1, $2, $3)',
+                    values,
+                    (err) => {
+                        done();
+                        if (err) {
+                            console.log(err.stack);
+                        }
+                    }
+                );
+            });
+        } else if (jmessage.type == 'authenticate') {
+            //auth shit
+        }
+        console.log(jmessage);
+    });
+
+    ws.send('connected');
 });

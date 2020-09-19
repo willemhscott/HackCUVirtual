@@ -31,8 +31,58 @@ app.get('/viewtable', (req, res) => {
     });
 });
 
-app.post('/sendmessage', (req, res) => {
-    const values = [ req.body.fromuser, req.body.touser, req.body.content ];
+app.get('/viewtablem', (req, res) => {
+    pool.connect((err, client, done) => {
+        if (err) throw err;
+        client.query('SELECT * FROM messages', (err, reso) => {
+            done();
+            if (err) {
+                console.log(err.stack);
+            } else {
+                res.send(reso.rows);
+            }
+        });
+    });
+});
+
+app.get('/getprofile/:uname', (req, res) => {
+    pool.connect((err, client, done) => {
+        if (err) throw err;
+        client.query('SELECT * FROM users WHERE username = $1', [ req.params.uname ], (err, reso) => {
+            done();
+            if (err) {
+                console.log(err.stack);
+            } else {
+                const user = {
+                    display_name: reso.rows[0].display_name,
+                    age: reso.rows[0].age,
+                    gender: reso.rows[0].gender,
+                    favorites: reso.rows[0].favorites,
+                    allergens: reso.rows[0].allergens,
+                    covid: reso.rows[0].covid
+                };
+                res.send(user);
+            }
+        });
+    });
+});
+
+app.get('/getmessages/:to/:from', (req, res) => {
+    pool.connect((err, client, done) => {
+        if (err) throw err;
+        client.query(
+            'SELECT from_user, timestamp, content FROM messages WHERE (from_user = $1 and to_user = $2) OR (from_user = $2 and to_user = $1)',
+            [ req.params.to, req.params.from ],
+            (err, reso) => {
+                done();
+                if (err) {
+                    console.log(err.stack);
+                } else {
+                    res.send(reso.rows);
+                }
+            }
+        );
+    });
 });
 
 app.post('/createuser', (req, res) => {
