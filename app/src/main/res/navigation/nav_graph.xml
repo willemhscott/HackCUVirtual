@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+    >
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.github.henry232323.hackcuvirtual.FirstFragment"
+        android:id="@+id/First2Fragment"
+        android:name="com.github.henry232323.hackcuvirtual.First2Fragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_first2">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_First2Fragment_to_Second2Fragment"
+            app:destination="@id/Second2Fragment"/>
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.github.henry232323.hackcuvirtual.SecondFragment"
+        android:id="@+id/Second2Fragment"
+        android:name="com.github.henry232323.hackcuvirtual.Second2Fragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_second2">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_Second2Fragment_to_First2Fragment"
+            app:destination="@id/First2Fragment"/>
     </fragment>
 </navigation>

@@ -1,6 +1,7 @@
 package com.github.henry232323.hackcuvirtual
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
@@ -53,13 +54,16 @@ interface WebsocketClient {
 
 const val WEBSOCK_URL = "wss://3.17.77.33"
 
-class Messenger : AppCompatActivity() {
+class Messenger {
 
     lateinit var authentication: Authentication
     lateinit var messenger: WebsocketClient
+    lateinit var application: Application
 
     @SuppressLint("CheckResult")
-    public fun start(username: String, password: String) {
+    public fun start(application: Application, username: String, password: String) {
+        this.application = application
+
         authentication = Authentication("authenticate", username, password)
         val BACKOFF_STRATEGY = ExponentialWithJitterBackoffStrategy(1000, 60000)
         val scarletInst = Scarlet.Builder()
