@@ -1,25 +1,17 @@
 package com.github.henry232323.hackcuvirtual
 
+//import com.tinder.scarlet.messageadapter.moshi.MoshiMessageAdapter
 import android.annotation.SuppressLint
 import android.app.Application
-import android.os.Bundle
-import android.os.PersistableBundle
-import androidx.appcompat.app.AppCompatActivity
-
 import com.tinder.scarlet.Lifecycle
-import com.tinder.scarlet.MessageAdapter
 import com.tinder.scarlet.Scarlet
 import com.tinder.scarlet.WebSocket
 import com.tinder.scarlet.lifecycle.android.AndroidLifecycle
-//import com.tinder.scarlet.messageadapter.moshi.MoshiMessageAdapter
 import com.tinder.scarlet.retry.ExponentialWithJitterBackoffStrategy
 import com.tinder.scarlet.streamadapter.rxjava2.RxJava2StreamAdapterFactory
 import com.tinder.scarlet.ws.Receive
 import com.tinder.scarlet.ws.Send
 import io.reactivex.Flowable
-import java.sql.Timestamp
-import java.time.Instant
-import java.time.format.DateTimeFormatter
 
 data class Authentication(
     val type: String = "authenticate",
@@ -61,7 +53,7 @@ class Messenger {
     lateinit var application: Application
 
     @SuppressLint("CheckResult")
-    public fun start(application: Application, username: String, password: String) {
+    fun start(application: Application, username: String, password: String) {
         this.application = application
 
         authentication = Authentication("authenticate", username, password)
