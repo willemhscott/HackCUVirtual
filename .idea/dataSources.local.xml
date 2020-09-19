@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="PostgreSQL - hackcuvirtual@localhost" uuid="91200f9b-3ed9-4f31-aed4-2ddc51052292">
+      <database-info product="PostgreSQL" version="12.4 (Ubuntu 12.4-1.pgdg20.04+1)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5" dbms="POSTGRES" exact-version="12.4" exact-driver-version="42.2">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>ubuntu</user-name>
+      <schema-mapping />
+      <ssh-properties>
+        <enabled>true</enabled>
+        <ssh-config-id>92824433-5688-4080-9225-3062ae075f4f</ssh-config-id>
+      </ssh-properties>
+    </data-source>
+  </component>
+</project>
