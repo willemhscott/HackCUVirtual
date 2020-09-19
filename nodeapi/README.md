@@ -1,5 +1,6 @@
 Endpoints:
 - sendmessage:
+    - post
     - json body
     - from user
     - to user
@@ -10,6 +11,7 @@ Endpoints:
       INSERT INTO messages (from_user, to_user, content) VALUES ($1, $2, $3)
       ```
 - getprofile:
+    - get
     - username
     - display name
     - description
@@ -17,10 +19,12 @@ Endpoints:
     - allergic
     - corona
 - messagehistory
+    - get
     - ```postgresql
       SELECT from_user, timestamp, content FROM messages WHERE (from_user = $1 and to_user = $2) OR (from_user = $2 and to_user = $1)
       ```
 - createuser
+    - post
     - like sendmessage
     - error if user with username already exists
     - ```postgresql
