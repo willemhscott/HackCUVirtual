@@ -6,4 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".UserViewActivity">
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="166dp"
+        android:layout_height="97dp"
+        android:text="Nay"
+        tools:layout_editor_absoluteX="229dp"
+        tools:layout_editor_absoluteY="337dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="166dp"
+        android:layout_height="97dp"
+        android:text="Yay"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="337dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="273dp"
+        android:layout_height="258dp"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="33dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
