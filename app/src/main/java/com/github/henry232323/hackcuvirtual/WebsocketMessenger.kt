@@ -121,4 +121,29 @@ class Messenger {
         //  textView.setText(message)
     }
 
+    fun requestInfo( username: String ) {
+        // Make request to http://3.17.77.33/getprofile/usernamegoeshere
+
+        val client = OkHttpClient()
+
+        val request: Request = Request.Builder()
+            .url("http://3.17.77.33/users/$username")
+            .addHeader("Authorization", authentication.token)
+            .get()
+            .build()
+
+        client.newCall(request).enqueue(object: Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+                // do something if it fails
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    // do something with response here
+                }
+            }
+        })
+    }
+
 }
