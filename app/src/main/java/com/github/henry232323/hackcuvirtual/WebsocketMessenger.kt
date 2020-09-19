@@ -11,7 +11,7 @@ import com.tinder.scarlet.MessageAdapter
 import com.tinder.scarlet.Scarlet
 import com.tinder.scarlet.WebSocket
 import com.tinder.scarlet.lifecycle.android.AndroidLifecycle
-import com.tinder.scarlet.messageadapter.moshi.MoshiMessageAdapter
+//import com.tinder.scarlet.messageadapter.moshi.MoshiMessageAdapter
 import com.tinder.scarlet.retry.ExponentialWithJitterBackoffStrategy
 import com.tinder.scarlet.streamadapter.rxjava2.RxJava2StreamAdapterFactory
 import com.tinder.scarlet.ws.Receive
@@ -68,7 +68,7 @@ class Messenger {
         val BACKOFF_STRATEGY = ExponentialWithJitterBackoffStrategy(1000, 60000)
         val scarletInst = Scarlet.Builder()
             .backoffStrategy(BACKOFF_STRATEGY)
-            .addMessageAdapterFactory(MoshiMessageAdapter.Factory())
+//            .addMessageAdapterFactory(MoshiMessageAdapter.Factory())
             .addStreamAdapterFactory(RxJava2StreamAdapterFactory())
             .lifecycle(createAppForegroundAndUserLoggedInLifecycle())
             .build()
