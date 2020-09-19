@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 /nodeapi/node_modules
+/node_modules
