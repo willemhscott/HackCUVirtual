@@ -83,13 +83,11 @@ class Messenger {
 
     fun createAppForegroundAndUserLoggedInLifecycle(): Lifecycle {
         return AndroidLifecycle.ofApplicationForeground(application)
-            .combineWith(loggedInLifecycle)
+//            .combineWith(loggedInLifecycle)
     }
 
     private fun onConnectionOpen() {
-        if (authentication != null) {
-            messenger.sendAuth(authentication);
-        }
+        messenger.sendAuth(authentication)
     }
 
     private fun processMessage(message: Message) {
