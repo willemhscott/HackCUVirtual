@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MessangerActivity">
+    tools:context=".MessengerActivity">
 
     <TextView
         android:id="@+id/messanger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Messanger Activity"
+        android:text="Messenger Activity"
         android:textColor="#AA5833"
         android:textSize="42sp"
         app:layout_constraintBottom_toBottomOf="parent"
