@@ -14,7 +14,6 @@ import com.tinder.scarlet.ws.Receive
 import com.tinder.scarlet.ws.Send
 import io.reactivex.Flowable
 import okhttp3.*
-import org.jetbrains.annotations.NotNull
 import org.json.JSONObject
 import java.io.IOException
 
@@ -53,16 +52,12 @@ const val WEBSOCK_URL = "wss://3.17.77.33"
 const val API_BASE = "http://3.17.77.33"
 
 class Messenger {
-    companion object {
-        val instance: Messenger = Messenger();
-    }
 
     lateinit var authentication: Authentication
     lateinit var messenger: WebsocketClient
     lateinit var application: Application
 
     fun getToken(username: String, password: String) {
-
         val client = OkHttpClient()
 
         val body = JSONObject()
@@ -126,7 +121,7 @@ class Messenger {
         //  textView.setText(message)
     }
 
-    fun requestInfo(username: String) {
+    fun requestInfo( username: String ) {
         // Make request to http://3.17.77.33/getprofile/usernamegoeshere
 
         val client = OkHttpClient()
@@ -137,7 +132,7 @@ class Messenger {
             .get()
             .build()
 
-        client.newCall(request).enqueue(object : Callback {
+        client.newCall(request).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
                 // do something if it fails

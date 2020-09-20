@@ -13,5 +13,11 @@ class UserViewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user_view)
     }
 
-//    requestInfo( "zach" );
+    fun getUserData(username:String) {
+//        Messenger.instance.requestInfo(username)
+    }
+
+    fun loadProfile( data: String ) {
+
+    }
 }
