@@ -180,14 +180,14 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                             } else {
                                 let users = []
                                 console.log(reso.rows)
-                                reso.rows.forEach(row => users.push(user = {
+                                reso.rows.forEach(row => [users.push({
                                     display_name: row.display_name,
                                     age: row.age,
                                     gender: row.gender,
                                     favorites: row.favorites,
                                     allergens: row.allergens,
                                     covid: row.covid
-                                }), console.log(user.display_name))
+                                }), console.log(row.display_name)])
 
                                 res.send(users);
                             }
