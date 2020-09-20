@@ -15,7 +15,7 @@ import java.io.IOException
 class LoginActivity : AppCompatActivity() {
 
     companion object{
-        var current_user = " "
+        var current_user = ""
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

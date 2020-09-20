@@ -1,15 +1,20 @@
 package com.github.henry232323.hackcuvirtual
 
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONArray
 import org.json.JSONObject
+import java.net.URI
 import java.util.*
 
 
 class UserViewActivity : AppCompatActivity() {
+    var counter = 0;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_view)
@@ -26,7 +31,10 @@ class UserViewActivity : AppCompatActivity() {
     }
 
     fun getUserData(username:String) {
-        Messenger.instance.getPotentialMatches(username, { arr: JSONArray -> loadProfile( arr[0] as JSONObject ) } )
+        Messenger.instance.getPotentialMatches(username, { arr: JSONArray ->
+            loadProfile( arr[counter] as JSONObject )
+            counter += 1;
+        } )
     }
 
     fun loadProfile( data: JSONObject ) {
@@ -36,21 +44,22 @@ class UserViewActivity : AppCompatActivity() {
             data.getString("gender"),
             data.getJSONArray("favorites"),
             data.getJSONArray( "allergens"),
-            data.getBoolean("covid") )
+//            data.getBoolean("covid"))//,
+            data.getString("photo") )
 
         val displayName: TextView = findViewById(R.id.name_display)
         val displayAge: TextView = findViewById(R.id.age_display)
         val displayGender: TextView = findViewById(R.id.gender_display)
         val displayFavorites: TextView = findViewById(R.id.favorites_display)
         val displayAllergies: TextView = findViewById(R.id.allergen_display)
-        val displayCovid: TextView = findViewById(R.id.covid_display)
+        val displayImage: ImageView = findViewById(R.id.imageView)
 
         displayName.setText(user.dName)
         displayAge.setText(user.age.toString())
         displayGender.setText(user.gender)
         displayFavorites.setText(user.getFavorites())
         displayAllergies.setText(user.getAllergies())
-        displayCovid.setText(user.getCovidResults())
+        displayImage.setImageURI(Uri.parse(user.photo))
     }
 
 }

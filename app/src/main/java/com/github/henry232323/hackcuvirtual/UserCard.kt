@@ -2,14 +2,15 @@ package com.github.henry232323.hackcuvirtual
 
 import org.json.JSONArray
 
-class UserCard(username: String, displayName: String, age: Int, gender: String, favorites: JSONArray, allergens: JSONArray, covid: Boolean ) {
+class UserCard(username: String, displayName: String, age: Int, gender: String, favorites: JSONArray, allergens: JSONArray, photo: String ) {
     val uName = username
     val dName = displayName
     val age = age
     val gender = gender
     val favs = favorites
     val alrgs = allergens
-    val cov19 = covid
+//    val cov19 = covid
+    val photo = photo;
 
     fun displayInfo() {
         println("Username: $uName\n DisplayName: $dName")
@@ -40,11 +41,11 @@ class UserCard(username: String, displayName: String, age: Int, gender: String, 
         }
         return ret
     }
-
-    fun getCovidResults(): String {
-        if( cov19 ) return "I am covid positive"
-        else return "I tested negative for covid"
-    }
+//
+//    fun getCovidResults(): String {
+//        if( cov19 ) return "I am covid positive"
+//        else return "I tested negative for covid"
+//    }
 }
 
 
