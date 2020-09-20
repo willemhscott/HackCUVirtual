@@ -168,12 +168,12 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                     reso.rows.forEach(processEntry)
 
                     res.send(users);
-                    return
 
                     client.query(
                         'SELECT * FROM users WHERE username = ANY($1)',
                         [dusers],
                         (err, reso) => {
+                            console.log('asdasdasdasdasd', reso)
                             if (err) {
                                 res.sendStatus(403)
                                 console.log(err.stack);
