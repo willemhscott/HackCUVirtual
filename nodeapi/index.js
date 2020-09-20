@@ -175,7 +175,6 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                         (err, reso) => {
                             console.log('asdasdasdasdasd', reso)
                             if (err) {
-                                res.sendStatus(403)
                                 console.log(err.stack);
                             } else {
                                 for (let i = 0; i < reso.size; i++) {
