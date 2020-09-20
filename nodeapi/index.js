@@ -174,25 +174,22 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                         [dusers],
                         (err, reso) => {
                             if (err) {
+                                res.sendStatus(500)
                                 console.log(err.stack);
                             } else {
                                 console.log(reso.rows)
-                                for (let i = 0; i < reso.rows.size; i++) {
-                                    let user = {
-                                        display_name: reso.rows[i].display_name,
-                                        age: reso.rows[i].age,
-                                        gender: reso.rows[i].gender,
-                                        favorites: reso.rows[i].favorites,
-                                        allergens: reso.rows[i].allergens,
-                                        covid: reso.rows[i].covid
-                                    };
-
-                                    users.push(user)
-                                }
-                                console.log(users)
-
+                                reso.rows.forEach(row => users.push(user = {
+                                    display_name: row.display_name,
+                                    age: row.age,
+                                    gender: row.gender,
+                                    favorites: row.favorites,
+                                    allergens: row.allergens,
+                                    covid: row.covid
+                                }))
+                                
                                 res.send(users);
                             }
+
 
                             done();
                         });
