@@ -184,7 +184,7 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                                     users.push(user)
                                 }
 
-                                res.send(user);
+                                res.send(users);
                             }
 
                             done();
