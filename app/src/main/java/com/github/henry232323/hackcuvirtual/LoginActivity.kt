@@ -36,11 +36,13 @@ class LoginActivity : AppCompatActivity() {
 
             Messenger.instance.getToken(iUsername, iPassword, object: Callback {
                 override fun onFailure(call: Call, e: IOException){
+                    println("Login failed!")
                     val failText = TextView(activity)
                     failText.setText("Login Failed")
                 }
 
                 override fun onResponse(call: Call, response: Response) {
+                    print("loogin")
                     val successText = TextView(activity)
                     successText.setText("Login Successful!")
                     val intent = Intent(activity, MainActivity::class.java)

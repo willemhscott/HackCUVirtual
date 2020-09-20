@@ -1,20 +1,19 @@
 package com.github.henry232323.hackcuvirtual
 
-//import com.tinder.scarlet.messageadapter.moshi.MoshiMessageAdapter
-
 import android.annotation.SuppressLint
 import android.app.Application
 import com.tinder.scarlet.Lifecycle
 import com.tinder.scarlet.Scarlet
 import com.tinder.scarlet.WebSocket
 import com.tinder.scarlet.lifecycle.android.AndroidLifecycle
+import com.tinder.scarlet.messageadapter.moshi.MoshiMessageAdapter
 import com.tinder.scarlet.retry.ExponentialWithJitterBackoffStrategy
 import com.tinder.scarlet.streamadapter.rxjava2.RxJava2StreamAdapterFactory
+import com.tinder.scarlet.websocket.okhttp.newWebSocketFactory
 import com.tinder.scarlet.ws.Receive
 import com.tinder.scarlet.ws.Send
 import io.reactivex.Flowable
 import okhttp3.*
-import org.jetbrains.annotations.NotNull
 import org.json.JSONObject
 import java.io.IOException
 
@@ -54,15 +53,15 @@ const val API_BASE = "http://3.17.77.33:80"
 
 class Messenger {
     companion object {
-        val instance: Messenger = Messenger();
+        val instance: Messenger = Messenger()
     }
 
     lateinit var authentication: Authentication
     lateinit var messenger: WebsocketClient
     lateinit var application: Application
+    val client = OkHttpClient()
 
-    fun getToken(username: String, password: String, callback : Callback) {
-        val client = OkHttpClient()
+    fun getToken(username: String, password: String, callback: Callback) {
 
         val body = JSONObject()
         body.put("username", username)
@@ -85,12 +84,20 @@ class Messenger {
             override fun onResponse(call: Call, response: Response) {
                 response.use {
                     println("kkkkkkkkkkkkkkkkkkkkkk!")
-                    println("Bad response code ${response.code()}")
+                    println("Response code ${response.code()}")
                     println(response.headers())
-                    if (!response.isSuccessful) return callback.onFailure(call, IOException("Bad response code ${response.code()}"))
-                    if (response.header("X-Authentication") == null) return callback.onFailure(call, IOException("Missing authentication header"))
+                    println(response.header("X-Authorization"))
+                    if (!response.isSuccessful) return onFailure(
+                        call,
+                        IOException("Bad response code ${response.code()}")
+                    )
+                    println("Good code")
+                    if (response.header("X-Authorization") == null) return onFailure(
+                        call,
+                        IOException("Missing authentication header")
+                    )
                     println("Authentasdasdasdsaicated!")
-                    authentication = Authentication("authenticate", response.header("X-Authentication")!!)
+                    authentication = Authentication("authenticate", response.header("X-Authorization")!!)
                     println("Authenticated!")
                     callback.onResponse(call, response)
                 }
@@ -105,9 +112,10 @@ class Messenger {
         val BACKOFF_STRATEGY = ExponentialWithJitterBackoffStrategy(1000, 60000)
         val scarletInst = Scarlet.Builder()
             .backoffStrategy(BACKOFF_STRATEGY)
-//            .addMessageAdapterFactory(MoshiMessageAdapter.Factory())
+            .webSocketFactory(client.newWebSocketFactory(WEBSOCK_URL))
+            .addMessageAdapterFactory(MoshiMessageAdapter.Factory())
             .addStreamAdapterFactory(RxJava2StreamAdapterFactory())
-            .lifecycle(createAppForegroundAndUserLoggedInLifecycle())
+//            .lifecycle(createAppForegroundAndUserLoggedInLifecycle())
             .build()
 
 
@@ -139,8 +147,8 @@ class Messenger {
         val client = OkHttpClient()
 
         val request: Request = Request.Builder()
-            .url("http://3.17.77.33/users/$username")
-            .addHeader("Authorization", authentication.token)
+            .url("http://3.17.77.33/getprofile/$username")
+            .addHeader("X-Authorization", authentication.token)
             .get()
             .build()
 
@@ -152,7 +160,40 @@ class Messenger {
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    activity.loadProfile( JSONObject(response.body().toString()) )
+                    activity.loadProfile(JSONObject(response.body().toString()))
+                }
+            }
+        })
+    }
+
+    fun sendLike(sender: String, receiver: String, value: Boolean) {
+        val body = JSONObject()
+        body.put("sender", sender)
+        body.put("receiver", receiver)
+        body.put("value", value)
+
+        val request: Request = Request.Builder()
+            .url("$API_BASE/like")
+            .post(RequestBody.create(MediaType.get("application/json"), body.toString()))
+            .header("X-Authorization", authentication.token)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!response.isSuccessful) return onFailure(
+                        call,
+                        IOException("Bad response code ${response.code()}")
+                    )
+
+                    if (response.header("X-Authorization") == null) return onFailure(
+                        call,
+                        IOException("Missing authentication header")
+                    )
                 }
             }
         })

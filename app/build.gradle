@@ -46,7 +46,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
     implementation 'com.tinder.scarlet:scarlet:0.1.10'
     implementation "com.tinder.scarlet:websocket-okhttp:0.1.10"
+    implementation "com.squareup.moshi:moshi-kotlin:1.9.3"
     implementation "com.tinder.scarlet:stream-adapter-rxjava2:0.1.10"
+    implementation "com.tinder.scarlet:message-adapter-moshi:0.1.10"
     implementation 'com.tinder.scarlet:lifecycle-android:0.1.10'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

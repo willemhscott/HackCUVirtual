@@ -46,6 +46,25 @@ app.get('/viewtablem', (req, res) => {
     });
 });
 
+app.post('/like', (req, res) => {
+    const values = [ req.body.sender, req.body.receiver, req.body.value ];
+    pool.connect((err, client, done) => {
+        if (err) throw err;
+        client.query(
+            'INSERT INTO matches (sender, receiver, match) VALUES ($1, $2, $3)',
+            values,
+            (err, reso) => {
+                if (err) {
+                    res.sendStatus(500)
+                    console.log(err.stack);
+                }
+                res.send({"success": true});
+                done();
+            }
+        );
+    });
+});
+
 app.post('/login', (req, res) => {
     const values = [ req.body.username, req.body.password ];
     pool.connect((err, client, done) => {
@@ -63,6 +82,17 @@ app.post('/login', (req, res) => {
                             .update(req.body.username + req.body.password, 'utf8')
                             .digest('base64');
                         res.header('X-Authorization', hash)
+
+                        client.query('INSERT INTO authorizations (username, token) VALUES ($1, $2)',
+                            [req.body.username, hash],
+                            (err, reso) => {
+                                if (err) {
+                                    console.log(err.stack);
+                                    res.sendStatus(500)
+                                }
+                            }
+                        )
+
                         res.send({"success": true});
                     } else {
                         res.sendStatus(403)

@@ -39,7 +39,7 @@ const pool = new Pool({
 wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(message) {
         const jmessage = JSON.parse(message);
-        if (jmessage.type == 'message') {
+        if (jmessage.type === 'message') {
             const values = [ jmessage.from, jmessage.to, jmessage.content ];
             pool.connect((err, client, done) => {
                 if (err) throw err;
@@ -54,8 +54,25 @@ wss.on('connection', function connection(ws) {
                     }
                 );
             });
-        } else if (jmessage.type == 'authenticate') {
-            //auth shit
+        } else if (jmessage.type === 'authenticate') {
+            const values = [ jmessage.username, jmessage.token ];
+            pool.connect((err, client, done) => {
+                if (err) throw err;
+                client.query(
+                    'SELECT token FROM authorizations WHERE username = $1 AND token = $2',
+                    values,
+                    (err) => {
+                        done();
+                        if (err) {
+                            console.log(err.stack);
+                        } else {
+                            if (!reso.rows[0]) {
+                                ws.close()
+                            }
+                        }
+                    }
+                );
+            });
         }
         console.log(jmessage);
     });
