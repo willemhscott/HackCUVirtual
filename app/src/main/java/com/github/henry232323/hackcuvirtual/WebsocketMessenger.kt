@@ -2,6 +2,9 @@ package com.github.henry232323.hackcuvirtual
 
 import android.annotation.SuppressLint
 import android.app.Application
+import com.squareup.moshi.JsonClass
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tinder.scarlet.Lifecycle
 import com.tinder.scarlet.Scarlet
 import com.tinder.scarlet.WebSocket
@@ -17,12 +20,13 @@ import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 
-
+@JsonClass(generateAdapter = true)
 data class Authentication(
     val type: String = "authenticate",
     val token: String
 )
 
+@JsonClass(generateAdapter = true)
 data class Message(
     val type: String = "message",
     val from: String,
@@ -40,9 +44,6 @@ interface WebsocketClient {
 
     @Receive
     fun observeMessage(): Flowable<Message>
-
-    @Receive
-    fun observeOnConnectionOpenedEvent(): Flowable<WebSocket.Event.OnConnectionOpened<*>>
 
     @Receive
     fun observeWebSocketEvent(): Flowable<WebSocket.Event>
@@ -109,11 +110,15 @@ class Messenger {
     fun start(application: Application) {
         this.application = application
 
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+
         val BACKOFF_STRATEGY = ExponentialWithJitterBackoffStrategy(1000, 60000)
         val scarletInst = Scarlet.Builder()
             .backoffStrategy(BACKOFF_STRATEGY)
             .webSocketFactory(client.newWebSocketFactory(WEBSOCK_URL))
-            .addMessageAdapterFactory(MoshiMessageAdapter.Factory())
+            .addMessageAdapterFactory(MoshiMessageAdapter.Factory(moshi))
             .addStreamAdapterFactory(RxJava2StreamAdapterFactory())
 //            .lifecycle(createAppForegroundAndUserLoggedInLifecycle())
             .build()
@@ -123,7 +128,9 @@ class Messenger {
 
 
         messenger.observeMessage().subscribe { message -> processMessage(message) }
-        messenger.observeOnConnectionOpenedEvent().subscribe { onConnectionOpen() }
+        messenger.observeWebSocketEvent()
+            .filter { it is WebSocket.Event.OnConnectionOpened<*> }
+            .subscribe { onConnectionOpen() }
     }
 
     fun createAppForegroundAndUserLoggedInLifecycle(): Lifecycle {
