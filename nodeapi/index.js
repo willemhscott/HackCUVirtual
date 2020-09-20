@@ -133,7 +133,7 @@ app.get('/getpotentialmatches/:uname', (req, res) => {
     pool.connect((err, client, done) => {
         if (err) throw err;
         client.query('SELECT * FROM users',// JOIN matches ON username = $1 or (username = ANY(ARRAY[sender, receiver]) AND $1 = ANY(ARRAY[sender, receiver]) AND match = true)',
-            [req.params.uname],
+            [], //[req.params.uname],
             (err, reso) => {
             done();
             if (err) {
