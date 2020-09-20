@@ -23,6 +23,7 @@ class MatchesActivity : AppCompatActivity() {
         var newCards = ArrayList<CardView>()
         for(i in 0 until num_matches){
             val newCard = CardView(this)
+
             newCard.layoutParams.width = 298
             newCard.layoutParams.height = 122
             newCard.setBackgroundColor(Color.parseColor("#BD6138"))
