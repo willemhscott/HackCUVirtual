@@ -167,8 +167,6 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
 
                     reso.rows.forEach(processEntry)
 
-                    res.send(users);
-
                     client.query(
                         'SELECT * FROM users WHERE username = ANY($1)',
                         [dusers],
