@@ -50,7 +50,7 @@ interface WebsocketClient {
 }
 
 const val WEBSOCK_URL = "wss://3.17.77.33"
-const val API_BASE = "http://3.17.77.33"
+const val API_BASE = "http://3.17.77.33:80"
 
 class Messenger {
     companion object {
@@ -62,7 +62,6 @@ class Messenger {
     lateinit var application: Application
 
     fun getToken(username: String, password: String, callback : Callback) {
-
         val client = OkHttpClient()
 
         val body = JSONObject()
@@ -76,16 +75,21 @@ class Messenger {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
+                println("errrrr!")
                 e.printStackTrace()
                 callback.onFailure(call, e)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
+                    println("kkkkkkkkkkkkkkkkkkkkkk!")
+                    println("Bad response code ${response.code()}")
+                    println(response.headers())
                     if (!response.isSuccessful) return callback.onFailure(call, IOException("Bad response code ${response.code()}"))
                     if (response.header("X-Authentication") == null) return callback.onFailure(call, IOException("Missing authentication header"))
-
+                    println("Authentasdasdasdsaicated!")
                     authentication = Authentication("authenticate", response.header("X-Authentication")!!)
+                    println("Authenticated!")
                     callback.onResponse(call, response)
                 }
             }
@@ -122,7 +126,7 @@ class Messenger {
     }
 
     private fun processMessage(message: Message) {
-        print(message.content)
+        println(message.content)
         //  val textView: TextView = findViewById(R.id.animalSound)
         //  textView.setText(message)
     }
