@@ -19,7 +19,7 @@ class MatchesActivity : AppCompatActivity() {
         Messenger.instance.requestMatchInfo(LoginActivity.current_user, this)
     }
 
-    fun createCards(num_matches: Int): ArrayList<CardView> {
+    /*fun createCards(num_matches: Int): ArrayList<CardView> {
         var newCards = ArrayList<CardView>()
         for(i in 0 until num_matches){
             val newCard = CardView(this)
@@ -44,4 +44,5 @@ class MatchesActivity : AppCompatActivity() {
         }
         createCards(data.length())
     }
+    */
 }

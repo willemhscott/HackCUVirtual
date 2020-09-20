@@ -8,45 +8,79 @@
     android:background="#333942"
     android:id="@+id/pageID">
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:id="@+id/cardView1"-->
-<!--        android:layout_width="298dp"-->
-<!--        android:layout_height="122dp"-->
-<!--        app:cardBackgroundColor="@color/colorSecondary"-->
-<!--        app:cardCornerRadius="15dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.495"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.794" />-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="298dp"
+        android:layout_height="122dp"
+        app:cardBackgroundColor="@color/colorSecondary"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.257">
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:id="@+id/cardView2"-->
-<!--        android:layout_width="298dp"-->
-<!--        android:layout_height="122dp"-->
-<!--        app:cardBackgroundColor="@color/colorSecondary"-->
-<!--        app:cardCornerRadius="15dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/cardView1"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.495"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/cardView3"-->
-<!--        app:layout_constraintVertical_bias="0.457" />-->
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:text="  Zach: \n   Age:  72  \n  Gender: Male\n  Favorites: Peanuts\n   Allergic To: A Good Time\n"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.cardview.widget.CardView>
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:id="@+id/cardView3"-->
-<!--        android:layout_width="298dp"-->
-<!--        android:layout_height="122dp"-->
-<!--        app:cardBackgroundColor="@color/colorSecondary"-->
-<!--        app:cardCornerRadius="15dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.495"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.257"-->
-<!--        android:tooltipText="asdfasdfsdaf"/>-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView1"
+        android:layout_width="298dp"
+        android:layout_height="122dp"
+        app:cardBackgroundColor="@color/colorSecondary"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.794" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:text="  Henry: \n   Age:  31  \n  Gender: Male\n  Favorites: Peanuts\n   Allergic To: Peanuts\n"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="298dp"
+        android:layout_height="122dp"
+        app:cardBackgroundColor="@color/colorSecondary"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3"
+        app:layout_constraintVertical_bias="0.457" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:text="  Bico: \n   Age:  19  \n  Gender: Male\n  Favorites: Pizza\n  Allergic To: Shellfish\n"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.cardview.widget.CardView>
+
+
 
     <TextView
         android:id="@+id/matches_title"
