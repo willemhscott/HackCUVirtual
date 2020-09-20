@@ -51,7 +51,7 @@ app.post('/like', (req, res) => {
     pool.connect((err, client, done) => {
         if (err) throw err;
         client.query(
-            'INSERT INTO matches (sender, receiver, match) VALUES ($1, $2, $3)',
+            'INSERT INTO matches (sender, receiver, match) VALUES ($1, $2, $3)',// ON CONFLICT sender, receiver SET match = $3',
             values,
             (err, reso) => {
                 if (err) {
@@ -83,7 +83,7 @@ app.post('/login', (req, res) => {
                             .digest('base64');
                         res.header('X-Authorization', hash)
 
-                        client.query('INSERT INTO authorizations (username, token) VALUES ($1, $2)',
+                        client.query('INSERT INTO authorizations (username, token) VALUES ($1, $2) ON CONFLICT username SET token = $2',
                             [req.body.username, hash],
                             (err, reso) => {
                                 if (err) {

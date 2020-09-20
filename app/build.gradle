@@ -12,6 +12,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -50,6 +51,7 @@ dependencies {
     implementation "com.tinder.scarlet:stream-adapter-rxjava2:0.1.10"
     implementation "com.tinder.scarlet:message-adapter-moshi:0.1.10"
     implementation 'com.tinder.scarlet:lifecycle-android:0.1.10'
+    implementation 'com.android.support:multidex:1.0.3'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
