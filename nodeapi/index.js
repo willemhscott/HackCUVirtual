@@ -173,10 +173,12 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                         'SELECT * FROM users WHERE username = ANY($1)',
                         [dusers],
                         (err, reso) => {
+                            done();
                             if (err) {
                                 res.sendStatus(500)
                                 console.log(err.stack);
                             } else {
+                                let users = []
                                 console.log(reso.rows)
                                 reso.rows.forEach(row => users.push(user = {
                                     display_name: row.display_name,
@@ -185,13 +187,10 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                                     favorites: row.favorites,
                                     allergens: row.allergens,
                                     covid: row.covid
-                                }))
-                                
+                                }), console.log(user.display_name))
+
                                 res.send(users);
                             }
-
-
-                            done();
                         });
 
                 }
