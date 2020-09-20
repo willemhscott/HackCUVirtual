@@ -105,6 +105,29 @@ app.post('/login', (req, res) => {
     });
 });
 
+
+app.get('/getprofile/:uname', (req, res) => {
+    pool.connect((err, client, done) => {
+        if (err) throw err;
+        client.query('SELECT * FROM users WHERE username = $1', [req.params.uname], (err, reso) => {
+            done();
+            if (err) {
+                console.log(err.stack);
+            } else {
+                const user = {
+                    display_name: reso.rows[0].display_name,
+                    age: reso.rows[0].age,
+                    gender: reso.rows[0].gender,
+                    favorites: reso.rows[0].favorites,
+                    allergens: reso.rows[0].allergens,
+                    covid: reso.rows[0].covid
+                };
+                res.send(user);
+            }
+        });
+    });
+});
+
 app.get('/getpotentialmatches/:uname', (req, res) => {
     pool.connect((err, client, done) => {
         if (err) throw err;
