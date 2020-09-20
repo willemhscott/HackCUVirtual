@@ -31,11 +31,11 @@ class UserViewActivity : AppCompatActivity() {
 
     fun loadProfile( data: JSONObject ) {
         val user = UserCard( data.getString("username"),
-            data.getString("displayname"),
+            data.getString("display_name"),
             data.getInt("age"),
             data.getString("gender"),
-            data.getJSONArray("favorites") as List<String>,
-            data.getJSONArray( "allergens") as List<String>,
+            data.getJSONArray("favorites"),
+            data.getJSONArray( "allergens"),
             data.getBoolean("covid") )
 
         val displayName: TextView = findViewById(R.id.name_display)
@@ -46,7 +46,7 @@ class UserViewActivity : AppCompatActivity() {
         val displayCovid: TextView = findViewById(R.id.covid_display)
 
         displayName.setText(user.dName)
-        displayAge.setText(user.age)
+        displayAge.setText(user.age.toString())
         displayGender.setText(user.gender)
         displayFavorites.setText(user.getFavorites())
         displayAllergies.setText(user.getAllergies())

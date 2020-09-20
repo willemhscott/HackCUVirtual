@@ -1,6 +1,8 @@
 package com.github.henry232323.hackcuvirtual
 
-class UserCard( username: String, displayName: String, age: Int, gender: String, favorites: List<String>, allergens: List<String>, covid: Boolean ) {
+import org.json.JSONArray
+
+class UserCard(username: String, displayName: String, age: Int, gender: String, favorites: JSONArray, allergens: JSONArray, covid: Boolean ) {
     val uName = username
     val dName = displayName
     val age = age
@@ -14,11 +16,29 @@ class UserCard( username: String, displayName: String, age: Int, gender: String,
     }
 
     fun getFavorites(): String {
-        return favs.fold(""){ acc: String, elt: String -> elt+", "+acc }
+        var ret = ""
+        for (i in 0 until favs.length()) {
+            ret = ret + favs.getString(i)
+            if ( i < favs.length() - 1) {
+                ret = ret + ", "
+            } else {
+                ret = ret + " "
+            }
+        }
+        return ret
     }
 
     fun getAllergies(): String {
-        return alrgs.fold(""){ acc: String, elt: String -> elt+", "+acc }
+        var ret = ""
+        for (i in 0 until alrgs.length()) {
+            ret = ret + alrgs.getString(i)
+            if ( i < alrgs.length() - 1) {
+                ret = ret + ", "
+            } else {
+                ret = ret + " "
+            }
+        }
+        return ret
     }
 
     fun getCovidResults(): String {
