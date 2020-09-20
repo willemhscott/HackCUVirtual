@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const app = express();
 const port = 80;
 
-const { Pool } = require('pg');
+const {Pool} = require('pg');
 
 app.use(bodyParser.json());
 
@@ -47,7 +47,7 @@ app.get('/viewtablem', (req, res) => {
 });
 
 app.post('/like', (req, res) => {
-    const values = [ req.body.sender, req.body.receiver, req.body.value ];
+    const values = [req.body.sender, req.body.receiver, req.body.value];
     pool.connect((err, client, done) => {
         if (err) throw err;
         client.query(
@@ -66,7 +66,7 @@ app.post('/like', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    const values = [ req.body.username, req.body.password ];
+    const values = [req.body.username, req.body.password];
     pool.connect((err, client, done) => {
         if (err) throw err;
         client.query(
@@ -108,7 +108,7 @@ app.post('/login', (req, res) => {
 app.get('/getprofile/:uname', (req, res) => {
     pool.connect((err, client, done) => {
         if (err) throw err;
-        client.query('SELECT * FROM users WHERE username = $1', [ req.params.uname ], (err, reso) => {
+        client.query('SELECT * FROM users WHERE username = $1', [req.params.uname], (err, reso) => {
             done();
             if (err) {
                 console.log(err.stack);
@@ -127,12 +127,82 @@ app.get('/getprofile/:uname', (req, res) => {
     });
 });
 
+app.get('/getmatchprofiles/:uname', (req, res) => {
+    let users = []
+    pool.connect((err, client, done) => {
+        if (err) throw err;
+        client.query(
+            'SELECT match, sender, receiver FROM matches WHERE $1 = ANY(ARRAY[sender, receiver])',
+            [req.params.uname],
+            (err, reso) => {
+                console.log(reso)
+                if (err) {
+                    console.log(err.stack);
+                } else {
+                    let dusers = []
+
+                    function processEntry(entry) {
+                        console.log(entry);
+                        if (entry.sender === req.params.uname) {
+                            return
+                        }
+
+                        if (!entry.match) {
+                            return
+                        }
+
+                        for (let i = 0; i < reso.rows.length; i++) {
+                            let inner = reso.rows[i];
+                            console.log('asd', inner.sender, entry.receiver);
+
+                            if (inner.sender === entry.receiver && entry.sender === inner.receiver) {
+                                console.log("Made it in!")
+                                if (inner.match && entry.match) {
+                                    dusers.push(entry.sender)
+                                }
+                            }
+                        }
+                    }
+
+
+                    reso.rows.forEach(processEntry)
+
+                    client.query(
+                        'SELECT * FROM users WHERE username = ANY($1)',
+                        [dusers],
+                        (err, reso) => {
+                            if (err) {
+                                // res.sendStatus(500)
+                                console.log(err.stack);
+                            } else {
+                                let users = []
+                                console.log(reso.rows)
+                                reso.rows.forEach(row => [users.push({
+                                    display_name: row.display_name,
+                                    age: row.age,
+                                    gender: row.gender,
+                                    favorites: row.favorites,
+                                    allergens: row.allergens,
+                                    covid: row.covid
+                                }), console.log(row.display_name)])
+                                console.log(users)
+                                res.send(users);
+                            }
+                            done();
+                        });
+
+                }
+            }
+        );
+    });
+});
+
 app.get('/getmessages/:to/:from', (req, res) => {
     pool.connect((err, client, done) => {
         if (err) throw err;
         client.query(
             'SELECT from_user, timestamp, content FROM messages WHERE (from_user = $1 and to_user = $2) OR (from_user = $2 and to_user = $1)',
-            [ req.params.to, req.params.from ],
+            [req.params.to, req.params.from],
             (err, reso) => {
                 done();
                 if (err) {
