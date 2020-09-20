@@ -17,6 +17,7 @@ import com.tinder.scarlet.ws.Receive
 import com.tinder.scarlet.ws.Send
 import io.reactivex.Flowable
 import okhttp3.*
+import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
@@ -168,6 +169,32 @@ class Messenger {
             override fun onResponse(call: Call, response: Response) {
                 response.use {
                     activity.loadProfile(JSONObject(response.body().toString()))
+                }
+            }
+        })
+    }
+
+    fun requestMatchInfo(username: String, activity: MatchesActivity) {
+        // Make request to http://3.17.77.33/getprofile/usernamegoeshere
+
+        val client = OkHttpClient()
+
+        val request: Request = Request.Builder()
+            .url("http://3.17.77.33/getmatchprofiles/$username")
+            .addHeader("X-Authorization", authentication.token)
+            .get()
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+                // do something if it fails
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    val jo = JSONArray(response.body().toString())
+                    activity.profileData()
                 }
             }
         })
