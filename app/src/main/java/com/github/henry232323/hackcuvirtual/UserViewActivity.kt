@@ -1,5 +1,6 @@
 package com.github.henry232323.hackcuvirtual
 
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
@@ -8,8 +9,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONArray
 import org.json.JSONObject
-import java.net.URI
-import java.util.*
+
+import com.bumptech.glide.Glide
 
 
 class UserViewActivity : AppCompatActivity() {
@@ -25,6 +26,10 @@ class UserViewActivity : AppCompatActivity() {
         getUserData( LoginActivity.current_user )
 
         likeButton.setOnClickListener {
+            getUserData( LoginActivity.current_user )
+        }
+
+        dislikeButton.setOnClickListener {
             getUserData( LoginActivity.current_user )
         }
 
@@ -59,7 +64,8 @@ class UserViewActivity : AppCompatActivity() {
         displayGender.setText(user.gender)
         displayFavorites.setText(user.getFavorites())
         displayAllergies.setText(user.getAllergies())
-        displayImage.setImageURI(Uri.parse(user.photo))
+        Glide.with(this).load(user.photo).into(displayImage)
+//        displayImage.setImageBitmap(bmp)
     }
 
 }
