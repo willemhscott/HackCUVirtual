@@ -5,46 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MatchesActivity"
-    android:background="#333942">
+    android:background="#333942"
+    android:id="@+id/pageID">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView1"
-        android:layout_width="298dp"
-        android:layout_height="122dp"
-        app:cardBackgroundColor="@color/colorSecondary"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.794" />
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/cardView1"-->
+<!--        android:layout_width="298dp"-->
+<!--        android:layout_height="122dp"-->
+<!--        app:cardBackgroundColor="@color/colorSecondary"-->
+<!--        app:cardCornerRadius="15dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.495"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.794" />-->
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="298dp"
-        android:layout_height="122dp"
-        app:cardBackgroundColor="@color/colorSecondary"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3"
-        app:layout_constraintVertical_bias="0.457" />
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/cardView2"-->
+<!--        android:layout_width="298dp"-->
+<!--        android:layout_height="122dp"-->
+<!--        app:cardBackgroundColor="@color/colorSecondary"-->
+<!--        app:cardCornerRadius="15dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/cardView1"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.495"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/cardView3"-->
+<!--        app:layout_constraintVertical_bias="0.457" />-->
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
-        android:layout_width="298dp"
-        android:layout_height="122dp"
-        app:cardBackgroundColor="@color/colorSecondary"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.257" />
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/cardView3"-->
+<!--        android:layout_width="298dp"-->
+<!--        android:layout_height="122dp"-->
+<!--        app:cardBackgroundColor="@color/colorSecondary"-->
+<!--        app:cardCornerRadius="15dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.495"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.257"-->
+<!--        android:tooltipText="asdfasdfsdaf"/>-->
 
     <TextView
         android:id="@+id/matches_title"

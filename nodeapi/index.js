@@ -120,7 +120,8 @@ app.get('/getprofile/:uname', (req, res) => {
                     gender: reso.rows[0].gender,
                     favorites: reso.rows[0].favorites,
                     allergens: reso.rows[0].allergens,
-                    covid: reso.rows[0].covid
+                    covid: reso.rows[0].covid,
+                    photos: reso.rows[0].photos
                 };
                 res.send(user);
             }
@@ -131,7 +132,9 @@ app.get('/getprofile/:uname', (req, res) => {
 app.get('/getpotentialmatches/:uname', (req, res) => {
     pool.connect((err, client, done) => {
         if (err) throw err;
-        client.query('SELECT * FROM users', [], (err, reso) => {
+        client.query('SELECT * FROM users',// JOIN matches ON username = $1 or (username = ANY(ARRAY[sender, receiver]) AND $1 = ANY(ARRAY[sender, receiver]) AND match = true)',
+            [], //[req.params.uname],
+            (err, reso) => {
             done();
             if (err) {
                 console.log(err.stack);
@@ -153,7 +156,8 @@ app.get('/getpotentialmatches/:uname', (req, res) => {
                         gender: reso.rows[i].gender,
                         favorites: reso.rows[i].favorites,
                         allergens: reso.rows[i].allergens,
-                        covid: reso.rows[i].covid
+                        covid: reso.rows[i].covid,
+                        photo: reso.rows[i].photo
                     };
 
                     for (let j = 0; j < user.favorites.length; j++) {
@@ -236,7 +240,8 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                                     gender: row.gender,
                                     favorites: row.favorites,
                                     allergens: row.allergens,
-                                    covid: row.covid
+                                    covid: row.covid,
+                                    photos: row.photos
                                 }), console.log(row.display_name)])
                                 console.log(users)
                                 res.send(users);

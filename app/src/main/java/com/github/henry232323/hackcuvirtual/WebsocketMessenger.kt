@@ -176,6 +176,11 @@ class Messenger {
 
     fun getPotentialMatches(username: String, callback: (JSONArray) -> Unit) {
         // Make request to http://3.17.77.33/getprofile/usernamegoeshere
+        /*
+        Messenger.instance.getPotentialMatches("henry") { arr: JSONArray ->
+            do something with arr
+        }
+         */
 
         val client = OkHttpClient()
 
