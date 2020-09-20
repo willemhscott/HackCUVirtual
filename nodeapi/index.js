@@ -187,7 +187,7 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                                     allergens: row.allergens,
                                     covid: row.covid
                                 }), console.log(row.display_name)])
-
+                                console.log(users)
                                 res.send(users);
                             }
                             done();
