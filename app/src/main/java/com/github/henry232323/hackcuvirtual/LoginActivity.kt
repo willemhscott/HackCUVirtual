@@ -19,16 +19,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val msg = intent.getBooleanExtra(EXTRA_MESSAGE, false)
-
         val login_title: TextView = findViewById(R.id.login_title)
-        val text:String = if(msg) "Already logged in" else "Not yet logged in";
-        login_title.setText(text)
+        login_title.setText("Login")
 
         //storing username and password from edit text boxes
         val bLogin = findViewById<Button>(R.id.btnLogin)
 
-        val activity = this
 
         bLogin.setOnClickListener{
             val iUsername = findViewById<EditText>(R.id.etUsername).getText().toString()
@@ -36,14 +32,12 @@ class LoginActivity : AppCompatActivity() {
 
             Messenger.instance.getToken(iUsername, iPassword, object: Callback {
                 override fun onFailure(call: Call, e: IOException){
-                    val failText = TextView(activity)
-                    failText.setText("Login Failed")
+                    login_title.setText("Login Failed")
                 }
 
                 override fun onResponse(call: Call, response: Response) {
-                    val successText = TextView(activity)
-                    successText.setText("Login Successful!")
-                    val intent = Intent(activity, MainActivity::class.java)
+                    login_title.setText("Login Successful!")
+                    val intent = Intent(this, Messages::class.java)
                     Messenger.instance.start(application)
                     startActivity(intent)
                 }

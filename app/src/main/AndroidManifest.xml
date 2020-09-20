@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MessangerActivity" />
+        <activity android:name=".MessengerActivity" />
         <activity android:name=".UserViewActivity" />
         <activity android:name=".ProfileViewActivity" />
         <activity android:name=".MatchesActivity" />
