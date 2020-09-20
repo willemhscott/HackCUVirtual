@@ -65,8 +65,8 @@ app.post('/login', (req, res) => {
                         res.header('X-Authorization', hash)
                         res.send({"success": true});
                     } else {
-                        res.code(403)
-                        res.send({"success": false, "error": "Invalid user or password"});
+                        res.sendStatus(403)
+                        // res.send({"success": false, "error": "Invalid user or password"});
                     }
                 }
                 done();
