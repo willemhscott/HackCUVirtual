@@ -26,13 +26,14 @@ class LoginActivity : AppCompatActivity() {
         login_title.setText(text)
 
         //storing username and password from edit text boxes
-        val iUsername = findViewById<EditText>(R.id.etUsername).text.toString()
-        val iPassword = findViewById<EditText>(R.id.etPassword).text.toString()
         val bLogin = findViewById<Button>(R.id.btnLogin)
 
-        val activity = this;
+        val activity = this
 
         bLogin.setOnClickListener{
+            val iUsername = findViewById<EditText>(R.id.etUsername).getText().toString()
+            val iPassword = findViewById<EditText>(R.id.etPassword).getText().toString()
+
             Messenger.instance.getToken(iUsername, iPassword, object: Callback {
                 override fun onFailure(call: Call, e: IOException){
                     val failText = TextView(activity)
