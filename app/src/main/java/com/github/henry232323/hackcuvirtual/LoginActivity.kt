@@ -14,6 +14,9 @@ import java.io.IOException
 
 class LoginActivity : AppCompatActivity() {
 
+    companion object{
+        var current_user = " "
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -28,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
         val activity = this
 
         bLogin.setOnClickListener {
+
             val iUsername = findViewById<EditText>(R.id.etUsername).text.toString()
             val iPassword = findViewById<EditText>(R.id.etPassword).text.toString()
 
@@ -44,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                     val intent = Intent(activity, Messages::class.java)
+                    current_user = iUsername
                     Messenger.instance.start(application)
                     startActivity(intent)
                 }
@@ -51,4 +56,5 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
+
 }

@@ -19,78 +19,71 @@
             android:textColor="@color/colorSecondary"
             android:textSize="42sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/login"
-            android:text="Login"
             android:layout_width="250sp"
             android:layout_height="80sp"
-            android:textAllCaps="False"
+            android:text="Login"
+            android:textAllCaps="false"
             android:textColor="@color/colorSecondary"
             android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.151"/>
+            app:layout_constraintVertical_bias="0.154" />
 
         <Button
             android:id="@+id/auto_login"
             android:layout_width="250sp"
             android:layout_height="80sp"
             android:text="Auto Login"
-            android:textAllCaps="False"
+            android:textAllCaps="false"
             android:textColor="@color/colorSecondary"
             android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3"/>
+            app:layout_constraintVertical_bias="0.3" />
 
         <Button
             android:id="@+id/user_view"
             android:layout_width="250sp"
             android:layout_height="80sp"
             android:text="User View"
-            android:textAllCaps="False"
+            android:textAllCaps="false"
             android:textColor="@color/colorSecondary"
             android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.457"/>
-
-        <Button
-            android:id="@+id/profile_view"
-            android:layout_width="250sp"
-            android:layout_height="80sp"
-            android:text="Profile View"
-            android:textAllCaps="False"
-            android:textColor="@color/colorSecondary"
-            android:textSize="32sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.472"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.605"/>
+            app:layout_constraintVertical_bias="0.45" />
 
         <Button
             android:id="@+id/matches"
             android:layout_width="250sp"
             android:layout_height="80sp"
-            android:layout_marginEnd="84dp"
+            android:layout_marginEnd="80dp"
             android:text="Matches"
-            android:textAllCaps="False"
+            android:textAllCaps="false"
             android:textColor="@color/colorSecondary"
             android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -99,37 +92,41 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.605" />
+            app:layout_constraintVertical_bias="0.606" />
 
         <Button
             android:id="@+id/profile_view"
             android:layout_width="250sp"
             android:layout_height="80sp"
             android:text="Profile"
-            android:textAllCaps="False"
+            android:textAllCaps="false"
             android:textColor="@color/colorSecondary"
             android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.759"/>
+            app:layout_constraintVertical_bias="0.754" />
 
         <Button
             android:id="@+id/messanger"
             android:layout_width="250sp"
             android:layout_height="80sp"
             android:text="Messanger"
-            android:textAllCaps="False"
+            android:textAllCaps="false"
             android:textColor="@color/colorSecondary"
             android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.912"/>
+            app:layout_constraintVertical_bias="0.905" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
