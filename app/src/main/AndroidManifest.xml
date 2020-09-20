@@ -14,13 +14,13 @@
         <activity android:name=".UserViewActivity" />
         <activity android:name=".ProfileViewActivity" />
         <activity android:name=".MatchesActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".Messages"
             android:label="@string/title_activity_messages"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
