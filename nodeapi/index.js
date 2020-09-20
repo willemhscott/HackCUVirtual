@@ -173,7 +173,6 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                         'SELECT * FROM users WHERE username = ANY($1)',
                         [dusers],
                         (err, reso) => {
-                            console.log('asdasdasdasdasd', reso)
                             if (err) {
                                 console.log(err.stack);
                             } else {
@@ -189,6 +188,7 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
 
                                     users.push(user)
                                 }
+                                console.log(users)
 
                                 res.send(users);
                             }
