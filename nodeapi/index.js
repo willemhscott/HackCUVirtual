@@ -83,7 +83,7 @@ app.post('/login', (req, res) => {
                             .digest('base64');
                         res.header('X-Authorization', hash)
 
-                        client.query('INSERT INTO authorizations (username, token) VALUES ($1, $2) ON CONFLICT username SET token = $2',
+                        client.query('INSERT INTO authorizations (username, token) VALUES ($1, $2) ON CONFLICT DO NOTHING',
                             [req.body.username, hash],
                             (err, reso) => {
                                 if (err) {
