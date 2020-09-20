@@ -135,12 +135,14 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
             'SELECT match, sender, receiver FROM matches WHERE $1 = ANY(ARRAY[sender, receiver])',
             [req.params.uname],
             (err, reso) => {
+                console.log(reso)
                 if (err) {
                     console.log(err.stack);
                 } else {
                     let dusers = []
 
                     function processEntry(entry) {
+                        console.log(entry);
                         if (entry.sender === req.params.uname) {
                             return
                         }
@@ -151,6 +153,7 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
 
                         for (let i = 0; i < reso.rows.length; i++) {
                             let inner = reso.rows[i];
+                            console.log(inner);
 
                             if (inner.sender === entry.receiver && entry.sender === inner.receiver) {
                                 if (inner.match && entry.match) {
