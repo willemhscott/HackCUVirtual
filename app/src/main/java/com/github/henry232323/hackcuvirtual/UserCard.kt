@@ -1,8 +1,9 @@
 package com.github.henry232323.hackcuvirtual
 
-class UserCard( username: String, displayName: String, gender: String, favorites: List<String>, allergens: List<String>, covid: Boolean ) {
+class UserCard( username: String, displayName: String, age: Int, gender: String, favorites: List<String>, allergens: List<String>, covid: Boolean ) {
     val uName = username
     val dName = displayName
+    val age = age
     val gender = gender
     val favs = favorites
     val alrgs = allergens
@@ -10,6 +11,19 @@ class UserCard( username: String, displayName: String, gender: String, favorites
 
     fun displayInfo() {
         println("Username: $uName\n DisplayName: $dName")
+    }
+
+    fun getFavorites(): String {
+        return favs.fold(""){ acc: String, elt: String -> elt+", "+acc }
+    }
+
+    fun getAllergies(): String {
+        return alrgs.fold(""){ acc: String, elt: String -> elt+", "+acc }
+    }
+
+    fun getCovidResults(): String {
+        if( cov19 ) return "I am covid positive"
+        else return "I tested negative for covid"
     }
 }
 
