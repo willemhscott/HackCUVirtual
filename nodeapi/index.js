@@ -141,7 +141,7 @@ app.get('/getpotentialmatches/:uname', (req, res) => {
             } else {
                 let uprofile = undefined;
                 for (let i = 0; i < reso.rows.length; i++) {
-                    if (reso.rows[i].username == req.params.uname) {
+                    if (reso.rows[i].username === req.params.uname) {
                         uprofile = reso.rows[i];
                         break;
                     }
@@ -184,7 +184,6 @@ app.get('/getpotentialmatches/:uname', (req, res) => {
 });
 
 app.get('/getmatchprofiles/:uname', (req, res) => {
-    let users = []
     pool.connect((err, client, done) => {
         if (err) throw err;
         client.query(
@@ -294,7 +293,7 @@ app.post('/createuser', (req, res) => {
                 console.log(err.stack);
             } else {
                 reso.rows.forEach((uname) => {
-                    if (uname.username == values[0]) {
+                    if (uname.username === values[0]) {
                         res.send('Username already taken');
                         taken = true;
                     }
