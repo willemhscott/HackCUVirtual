@@ -176,6 +176,7 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                             if (err) {
                                 console.log(err.stack);
                             } else {
+                                console.log(reso.rows)
                                 for (let i = 0; i < reso.rows.size; i++) {
                                     let user = {
                                         display_name: reso.rows[i].display_name,
