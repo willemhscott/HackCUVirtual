@@ -19,28 +19,16 @@
         app:layout_constraintVertical_bias="0.285" />
 
     <TextView
-        android:id="@+id/gender_display"
+        android:id="@+id/age_display"
         android:layout_width="113dp"
         android:layout_height="17dp"
-        android:text="Gender"
+        android:text="Age"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintHorizontal_bias="0.872"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.327" />
-
-    <TextView
-        android:id="@+id/favorites_display"
-        android:layout_width="113dp"
-        android:layout_height="17dp"
-        android:text="Favorite Foods"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.879"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.373" />
+        app:layout_constraintVertical_bias="0.324" />
 
     <TextView
         android:id="@+id/allergen_display"
@@ -49,10 +37,10 @@
         android:text="Allergens"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintHorizontal_bias="0.872"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.453" />
+        app:layout_constraintVertical_bias="0.49" />
 
     <TextView
         android:id="@+id/covid_display"
@@ -61,10 +49,34 @@
         android:text="Covid?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintHorizontal_bias="0.872"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintVertical_bias="0.452" />
+
+    <TextView
+        android:id="@+id/favorites_display"
+        android:layout_width="113dp"
+        android:layout_height="17dp"
+        android:text="Favorite Foods"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.41" />
+
+    <TextView
+        android:id="@+id/gender_display"
+        android:layout_width="113dp"
+        android:layout_height="17dp"
+        android:text="Gender"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.365" />
 
     <TextView
         android:id="@+id/user_view"
