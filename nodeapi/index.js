@@ -46,7 +46,7 @@ app.get('/viewtablem', (req, res) => {
     });
 });
 
-app.put('/login', (req, res) => {
+app.post('/login', (req, res) => {
     const values = [ req.body.username, req.body.password ];
     pool.connect((err, client, done) => {
         if (err) throw err;
