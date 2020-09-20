@@ -8,23 +8,12 @@ import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
+import java.io.IOException
 
 class LoginActivity : AppCompatActivity() {
-
-
-    fun loginFail(){
-        val failText = TextView(this)
-        failText.setText("Login Failed")
-    }
-
-    fun loginSuccess(){
-        val successText = TextView(this)
-        successText.setText("Login Successful!")
-        val intent = Intent(this, MainActivity::class.java)
-        Messenger.instance.start(application)
-        startActivity(intent)
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,10 +30,23 @@ class LoginActivity : AppCompatActivity() {
         val iPassword = findViewById<EditText>(R.id.etPassword).toString()
         val bLogin = findViewById<Button>(R.id.btnLogin)
 
-
+        val activity = this;
 
         bLogin.setOnClickListener{
-            Messenger.instance.getToken(iUsername, iPassword, loginSuccess, loginFail)
+            Messenger.instance.getToken(iUsername, iPassword, object: Callback {
+                override fun onFailure(call: Call, e: IOException){
+                    val failText = TextView(activity)
+                    failText.setText("Login Failed")
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val successText = TextView(activity)
+                    successText.setText("Login Successful!")
+                    val intent = Intent(activity, MainActivity::class.java)
+                    Messenger.instance.start(application)
+                    startActivity(intent)
+                }
+            })
         }
 
     }

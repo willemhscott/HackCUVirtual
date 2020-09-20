@@ -61,7 +61,7 @@ class Messenger {
     lateinit var messenger: WebsocketClient
     lateinit var application: Application
 
-    fun getToken(username: String, password: String, success: Unit, fail: Unit) {
+    fun getToken(username: String, password: String, callback : Callback) {
 
         val client = OkHttpClient()
 
@@ -77,16 +77,16 @@ class Messenger {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
-                fail()
+                callback.onFailure(call, e)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    if (!response.isSuccessful) return fail()
-                    if (response.header("X-Authentication") == null) return fail()
+                    if (!response.isSuccessful) return callback.onFailure(call, IOException("Bad response code ${response.code()}"))
+                    if (response.header("X-Authentication") == null) return callback.onFailure(call, IOException("Missing authentication header"))
 
                     authentication = Authentication("authenticate", response.header("X-Authentication")!!)
-                    return success()
+                    callback.onResponse(call, response)
                 }
             }
         })
