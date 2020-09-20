@@ -121,7 +121,7 @@ app.get('/getprofile/:uname', (req, res) => {
                     favorites: reso.rows[0].favorites,
                     allergens: reso.rows[0].allergens,
                     covid: reso.rows[0].covid,
-                    photos: reso.rows[0].photos
+                    photo: reso.rows[0].photo
                 };
                 res.send(user);
             }
@@ -240,7 +240,7 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                                     favorites: row.favorites,
                                     allergens: row.allergens,
                                     covid: row.covid,
-                                    photos: row.photos
+                                    photo: row.photo
                                 }), console.log(row.display_name)])
                                 console.log(users)
                                 res.send(users);
