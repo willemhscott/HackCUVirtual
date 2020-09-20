@@ -121,7 +121,7 @@ app.get('/getprofile/:uname', (req, res) => {
                     favorites: reso.rows[0].favorites,
                     allergens: reso.rows[0].allergens,
                     covid: reso.rows[0].covid,
-                    photos: reso.rows[0].photos
+                    photo: reso.rows[0].photo
                 };
                 res.send(user);
             }
@@ -141,7 +141,7 @@ app.get('/getpotentialmatches/:uname', (req, res) => {
             } else {
                 let uprofile = undefined;
                 for (let i = 0; i < reso.rows.length; i++) {
-                    if (reso.rows[i].username == req.params.uname) {
+                    if (reso.rows[i].username === req.params.uname) {
                         uprofile = reso.rows[i];
                         break;
                     }
@@ -184,7 +184,6 @@ app.get('/getpotentialmatches/:uname', (req, res) => {
 });
 
 app.get('/getmatchprofiles/:uname', (req, res) => {
-    let users = []
     pool.connect((err, client, done) => {
         if (err) throw err;
         client.query(
@@ -241,7 +240,7 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                                     favorites: row.favorites,
                                     allergens: row.allergens,
                                     covid: row.covid,
-                                    photos: row.photos
+                                    photo: row.photo
                                 }), console.log(row.display_name)])
                                 console.log(users)
                                 res.send(users);
@@ -294,7 +293,7 @@ app.post('/createuser', (req, res) => {
                 console.log(err.stack);
             } else {
                 reso.rows.forEach((uname) => {
-                    if (uname.username == values[0]) {
+                    if (uname.username === values[0]) {
                         res.send('Username already taken');
                         taken = true;
                     }
