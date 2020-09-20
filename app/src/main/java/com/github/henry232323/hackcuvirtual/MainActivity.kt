@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val userView: Button = findViewById(R.id.user_view)
         val matches: Button = findViewById(R.id.matches)
         val profileView: Button = findViewById(R.id.profile_view)
-        val messanger: Button = findViewById(R.id.messanger)
+        val messenger: Button = findViewById(R.id.messenger)
 
         var intent = Intent( this, LoginActivity::class.java).apply { putExtra(EXTRA_MESSAGE, false) }
 
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         userView.setOnClickListener { startActivity( Intent( this, UserViewActivity::class.java ) ) }
         matches.setOnClickListener { startActivity( Intent( this, MatchesActivity::class.java ) ) }
         profileView.setOnClickListener { startActivity( Intent( this, ProfileViewActivity::class.java ) ) }
-        messanger.setOnClickListener { startActivity( Intent( this, ProfileViewActivity::class.java ) ) }
+        messenger.setOnClickListener { startActivity( Intent( this, ProfileViewActivity::class.java ) ) }
 
 
     }

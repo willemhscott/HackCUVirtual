@@ -6,48 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".UserViewActivity">
 
-
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/name_display"
         android:layout_width="113dp"
         android:layout_height="17dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.879"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.495" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="113dp"
-        android:layout_height="17dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.879"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="113dp"
-        android:layout_height="17dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.879"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.327" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="113dp"
-        android:layout_height="17dp"
-        android:text="TextView"
+        android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.879"
@@ -56,10 +19,22 @@
         app:layout_constraintVertical_bias="0.285" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/gender_display"
         android:layout_width="113dp"
         android:layout_height="17dp"
-        android:text="TextView"
+        android:text="Gender"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.327" />
+
+    <TextView
+        android:id="@+id/favorites_display"
+        android:layout_width="113dp"
+        android:layout_height="17dp"
+        android:text="Favorite Foods"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.879"
@@ -68,16 +43,28 @@
         app:layout_constraintVertical_bias="0.373" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/allergen_display"
         android:layout_width="113dp"
         android:layout_height="17dp"
-        android:text="TextView"
+        android:text="Allergens"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.879"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.453" />
+
+    <TextView
+        android:id="@+id/covid_display"
+        android:layout_width="113dp"
+        android:layout_height="17dp"
+        android:text="Covid?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.415" />
 
     <TextView
         android:id="@+id/user_view"

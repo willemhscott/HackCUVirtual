@@ -168,7 +168,36 @@ class Messenger {
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    activity.loadProfile(JSONObject(response.body().toString()))
+                    activity.loadProfile(JSONObject(response.body()!!.string()))
+                }
+            }
+        })
+    }
+
+    fun getPotentialMatches(username: String, callback: (JSONArray) -> Unit) {
+        // Make request to http://3.17.77.33/getprofile/usernamegoeshere
+        /*
+        Messenger.instance.getPotentialMatches("henry") { it is ... }
+         */
+
+        val client = OkHttpClient()
+
+        val request: Request = Request.Builder()
+            .url("http://3.17.77.33/getpotentialmatches/$username")
+            .addHeader("X-Authorization", authentication.token)
+            .get()
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+                // do something if it fails
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    val jo = JSONArray(response.body()!!.string())
+                    callback(jo)
                 }
             }
         })
@@ -193,7 +222,7 @@ class Messenger {
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    val jo = JSONArray(response.body().toString())
+                    val jo = JSONArray(response.body()!!.string())
                     activity.profileData(jo)
                 }
             }

@@ -7,7 +7,7 @@
     tools:context=".MessengerActivity">
 
     <TextView
-        android:id="@+id/messanger"
+        android:id="@+id/messenger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Messenger Activity"
