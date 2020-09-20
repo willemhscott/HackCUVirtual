@@ -61,7 +61,7 @@ class Messenger {
     lateinit var messenger: WebsocketClient
     lateinit var application: Application
 
-    fun getToken(username: String, password: String) {
+    fun getToken(username: String, password: String, success: Unit, fail: Unit) {
 
         val client = OkHttpClient()
 
@@ -77,24 +77,25 @@ class Messenger {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
+                fail()
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
-                    if (response.header("X-Authentication") == null) throw IOException("Malformed response, missing auth header")
+                    if (!response.isSuccessful) return fail()
+                    if (response.header("X-Authentication") == null) return fail()
 
                     authentication = Authentication("authenticate", response.header("X-Authentication")!!)
+                    return success()
                 }
             }
         })
     }
 
     @SuppressLint("CheckResult")
-    fun start(application: Application, token: String) {
+    fun start(application: Application) {
         this.application = application
 
-        authentication = Authentication("authenticate", token)
         val BACKOFF_STRATEGY = ExponentialWithJitterBackoffStrategy(1000, 60000)
         val scarletInst = Scarlet.Builder()
             .backoffStrategy(BACKOFF_STRATEGY)
