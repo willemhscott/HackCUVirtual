@@ -153,9 +153,10 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
 
                         for (let i = 0; i < reso.rows.length; i++) {
                             let inner = reso.rows[i];
-                            console.log(inner);
+                            console.log('asd', inner.sender, entry.receiver);
 
                             if (inner.sender === entry.receiver && entry.sender === inner.receiver) {
+                                console.log("Made it in!")
                                 if (inner.match && entry.match) {
                                     dusers.push(entry.sender)
                                 }
@@ -165,6 +166,9 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
 
 
                     reso.rows.forEach(processEntry)
+
+                    res.send(users);
+                    return
 
                     client.query(
                         'SELECT * FROM users WHERE username = ANY($1)',
