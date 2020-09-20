@@ -194,7 +194,7 @@ class Messenger {
             override fun onResponse(call: Call, response: Response) {
                 response.use {
                     val jo = JSONArray(response.body().toString())
-                    activity.profileData()
+                    activity.profileData(jo)
                 }
             }
         })
