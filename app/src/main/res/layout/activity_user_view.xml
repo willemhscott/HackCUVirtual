@@ -98,10 +98,10 @@
         android:layout_height="197dp"
         app:layout_constraintBottom_toTopOf="@+id/btnLike"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.148"
+        app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.496"
+        app:layout_constraintVertical_bias="0.578"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
@@ -109,6 +109,7 @@
         android:layout_width="166dp"
         android:layout_height="97dp"
         android:text="Dislike"
+        android:textColor="@color/colorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.926"
@@ -121,6 +122,7 @@
         android:layout_width="166dp"
         android:layout_height="97dp"
         android:text="Like"
+        android:textColor="@color/colorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.13"
