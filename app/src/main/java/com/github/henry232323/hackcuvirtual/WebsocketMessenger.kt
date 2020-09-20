@@ -168,7 +168,7 @@ class Messenger {
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    activity.loadProfile(JSONObject(response.body().toString()))
+                    activity.loadProfile(JSONObject(response.body()!!.string()))
                 }
             }
         })
@@ -193,7 +193,7 @@ class Messenger {
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    val jo = JSONArray(response.body().toString())
+                    val jo = JSONArray(response.body()!!.string())
                     activity.profileData(jo)
                 }
             }

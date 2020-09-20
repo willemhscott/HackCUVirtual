@@ -105,23 +105,42 @@ app.post('/login', (req, res) => {
     });
 });
 
-app.get('/getprofile/:uname', (req, res) => {
+app.get('/getpotentialmatches/:uname', (req, res) => {
     pool.connect((err, client, done) => {
         if (err) throw err;
-        client.query('SELECT * FROM users WHERE username = $1', [req.params.uname], (err, reso) => {
+        client.query('SELECT * FROM users', [req.params.uname], (err, reso) => {
             done();
             if (err) {
                 console.log(err.stack);
             } else {
-                const user = {
-                    display_name: reso.rows[0].display_name,
-                    age: reso.rows[0].age,
-                    gender: reso.rows[0].gender,
-                    favorites: reso.rows[0].favorites,
-                    allergens: reso.rows[0].allergens,
-                    covid: reso.rows[0].covid
-                };
-                res.send(user);
+                let uprofile = undefined;
+                for (let i = 0; i < reso.rows.length; i++) {
+                    if (reso.rows[i].username == req.params.uname) {
+                        uprofile = reso.rows[i];
+                        break;
+                    }
+                }
+
+                let potmatches = [];
+                for (let i = 0; i < reso.rows.length; i++) {
+                    const user = {
+                        username: reso.rows[i].username,
+                        display_name: reso.rows[i].display_name,
+                        age: reso.rows[i].age,
+                        gender: reso.rows[i].gender,
+                        favorites: reso.rows[i].favorites,
+                        allergens: reso.rows[i].allergens,
+                        covid: reso.rows[i].covid
+                    };
+
+                    for (let j = 0; j < user.favorites.length; j++) {
+                        if (uprofile.allergens.includes(user.favorites[j])) {
+                            potmatches.push(user);
+                        }
+                    }
+                    potmatches.push(user)
+                }
+                res.send(potmatches);
             }
         });
     });
@@ -179,6 +198,7 @@ app.get('/getmatchprofiles/:uname', (req, res) => {
                                 console.log(reso.rows)
                                 reso.rows.forEach(row => [users.push({
                                     display_name: row.display_name,
+                                    username: row.username,
                                     age: row.age,
                                     gender: row.gender,
                                     favorites: row.favorites,
@@ -201,7 +221,7 @@ app.get('/getmessages/:to/:from', (req, res) => {
     pool.connect((err, client, done) => {
         if (err) throw err;
         client.query(
-            'SELECT from_user, timestamp, content FROM messages WHERE (from_user = $1 and to_user = $2) OR (from_user = $2 and to_user = $1)',
+            'SELECT from_user, timestamp, content FROM messages WHERE (from_user = $1 and to_user = $2) OR (from_user = $2 and to_user = $1) ORDER BY timestamp ASCENDING',
             [req.params.to, req.params.from],
             (err, reso) => {
                 done();
