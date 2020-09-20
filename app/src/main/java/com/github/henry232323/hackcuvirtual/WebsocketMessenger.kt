@@ -176,6 +176,9 @@ class Messenger {
 
     fun getPotentialMatches(username: String, callback: (JSONArray) -> Unit) {
         // Make request to http://3.17.77.33/getprofile/usernamegoeshere
+        /*
+        Messenger.instance.getPotentialMatches("henry") { it is ... }
+         */
 
         val client = OkHttpClient()
 
