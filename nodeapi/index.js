@@ -108,7 +108,7 @@ app.post('/login', (req, res) => {
 app.get('/getpotentialmatches/:uname', (req, res) => {
     pool.connect((err, client, done) => {
         if (err) throw err;
-        client.query('SELECT * FROM users', [req.params.uname], (err, reso) => {
+        client.query('SELECT * FROM users', [], (err, reso) => {
             done();
             if (err) {
                 console.log(err.stack);
