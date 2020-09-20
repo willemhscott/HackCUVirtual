@@ -17,6 +17,7 @@ class UserViewActivity : AppCompatActivity() {
         likeButton.setOnClickListener {
             getUserData( "zach" )
         }
+
     }
 
     fun getUserData(username:String) {
