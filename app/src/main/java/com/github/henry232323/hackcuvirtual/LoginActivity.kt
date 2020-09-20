@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
                         login_title.text = "Login Successful!"
                     }
 
-                    val intent = Intent(activity, Messages::class.java)
+                    val intent = Intent(activity, MainActivity::class.java)
                     current_user = iUsername
                     Messenger.instance.start(application)
                     startActivity(intent)
