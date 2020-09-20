@@ -18,11 +18,13 @@ Endpoints:
     - likes
     - allergic
     - corona
+    - `/getprofile/$username`
 - messagehistory
     - get
     - ```postgresql
       SELECT from_user, timestamp, content FROM messages WHERE (from_user = $1 and to_user = $2) OR (from_user = $2 and to_user = $1)
       ```
+    - `/getmessages/$to/$from`
 - createuser
     - post
     - like sendmessage
@@ -32,6 +34,7 @@ Endpoints:
                 $1, $2, $3, crypt($4, gen_salt('bf')), $5, $6, $7, $8, $9
       )
       ```
+    - `/createuser`
     - ```json
       {
           "username": "john",
