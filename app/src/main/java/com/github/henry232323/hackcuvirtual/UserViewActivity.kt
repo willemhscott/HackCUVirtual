@@ -65,15 +65,12 @@ class UserViewActivity : AppCompatActivity() {
         val displayImage: ImageView = findViewById(R.id.imageView)
 
         displayName.text = user.dName
-        displayAge.text = user.age.toString()
+        displayAge.text =  user.age.toString() + " years old"
         displayGender.text = user.gender
         displayFavorites.text = user.getFavorites()
         displayAllergies.text = user.getAllergies()
-        runOnUiThread {
-            Glide.with(this).load(user.photo).into(displayImage)
-        }
+        runOnUiThread { Glide.with(this).load(user.photo).into(displayImage) }
 
-//        displayImage.setImageBitmap(bmp)
     }
 
 }
