@@ -127,7 +127,7 @@ class Messenger {
         //  textView.setText(message)
     }
 
-    fun requestInfo(username: String) {
+    fun requestInfo(username: String, activity: UserViewActivity) {
         // Make request to http://3.17.77.33/getprofile/usernamegoeshere
 
         val client = OkHttpClient()
@@ -146,7 +146,7 @@ class Messenger {
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    // do something with response here
+                    activity.loadProfile( JSONObject(response.body().toString()) )
                 }
             }
         })

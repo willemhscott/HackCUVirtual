@@ -24,24 +24,30 @@
         android:id="@+id/imageView"
         android:layout_width="273dp"
         android:layout_height="258dp"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="134dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="134dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/nay"
         android:layout_width="166dp"
         android:layout_height="97dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="436dp"
         android:text="Nay"
-        tools:layout_editor_absoluteX="229dp"
-        tools:layout_editor_absoluteY="438dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/yay"
         android:layout_width="166dp"
         android:layout_height="97dp"
+        android:layout_marginTop="436dp"
+        android:layout_marginEnd="16dp"
         android:text="Yay"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="438dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
