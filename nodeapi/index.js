@@ -54,7 +54,6 @@ app.post('/login', (req, res) => {
             'SELECT username FROM users WHERE username = $1 AND password = crypt($2, password)',
             values,
             (err, reso) => {
-                done();
                 if (err) {
                     console.log(err.stack);
                 } else {
@@ -65,8 +64,11 @@ app.post('/login', (req, res) => {
                             .digest('base64');
                         res.header('X-Authorization', hash)
                         res.send({"success": true});
+                    } else {
+                        res.send({"success": false, "error": "Invalid user or password"});
                     }
                 }
+                done();
             }
         );
     });
