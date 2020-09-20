@@ -73,6 +73,8 @@ class Messenger {
             .post(RequestBody.create(MediaType.get("application/json"), body.toString()))
             .build()
 
+        println(body.toString())
+
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 println("errrrr!")

@@ -26,8 +26,8 @@ class LoginActivity : AppCompatActivity() {
         login_title.setText(text)
 
         //storing username and password from edit text boxes
-        val iUsername = findViewById<EditText>(R.id.etUsername).toString()
-        val iPassword = findViewById<EditText>(R.id.etPassword).toString()
+        val iUsername = findViewById<EditText>(R.id.etUsername).text.toString()
+        val iPassword = findViewById<EditText>(R.id.etPassword).text.toString()
         val bLogin = findViewById<Button>(R.id.btnLogin)
 
         val activity = this;
