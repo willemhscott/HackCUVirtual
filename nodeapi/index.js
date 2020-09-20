@@ -63,7 +63,8 @@ app.post('/login', (req, res) => {
                             .createHash('sha256')
                             .update(req.body.username + req.body.password, 'utf8')
                             .digest('base64');
-                        res.send({ headers: { 'x-authorization': hash } });
+                        res.header('X-Authorization', hash)
+                        res.send({"success": true});
                     }
                 }
             }
