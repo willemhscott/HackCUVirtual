@@ -136,9 +136,19 @@ app.get('/getpotentialmatches/:uname', (req, res) => {
                     for (let j = 0; j < user.favorites.length; j++) {
                         if (uprofile.allergens.includes(user.favorites[j])) {
                             potmatches.push(user);
+                            break;
                         }
                     }
-                    potmatches.push(user)
+                    if (potmatches.includes(user)) {
+                        continue;
+                    }
+
+                    for (let j = 0; j < uprofile.favorites.length; j++) {
+                        if (user.allergens.includes(uprofile.favorites[j])) {
+                            potmatches.push(user);
+                            break;
+                        }
+                    }
                 }
                 res.send(potmatches);
             }
